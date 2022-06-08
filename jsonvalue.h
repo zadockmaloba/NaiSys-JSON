@@ -58,6 +58,23 @@ public:
         {
             nDebug("String");
             m_isString = true;
+            _typeH = type_handle::String;
+            string_cont = _value;
+        }
+
+        else if constexpr(std::is_same_v< T  , char const *>)
+        {
+            nDebug("String");
+            m_isString = true;
+            _typeH = type_handle::String;
+            string_cont = _value;
+        }
+
+        else if constexpr(std::is_same_v< decltype (_value)  , char const *>)
+        {
+            nDebug("String");
+            m_isString = true;
+            _typeH = type_handle::String;
             string_cont = _value;
         }
 
