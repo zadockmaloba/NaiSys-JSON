@@ -10,12 +10,12 @@ JsonObject::JsonObject()
 JsonObject::JsonObject(const std::vector<_json_entry> &init)
 {
     for(auto const &v : init)
-        this->append(v);
+        this->append(v.key.c_str(), v.val);
 }
 
-void JsonObject::append(const _json_entry &entry)
+void JsonObject::append(const char *key, const JsonValue &val)
 {
-    m_objectMap.insert({entry.key, entry.val});
+    m_objectMap.insert({key, val});
 }
 
 const std::map<std::string, JsonValue> &JsonObject::toMap()

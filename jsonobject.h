@@ -21,7 +21,7 @@ public:
     JsonObject();
     explicit JsonObject(const std::vector<_json_entry> &init);
 
-    void append(const _json_entry &entry);
+    void append(const char *key, const JsonValue &val);
     const std::map <std::string, JsonValue> &toMap();
 
 private:
