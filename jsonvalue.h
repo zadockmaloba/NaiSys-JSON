@@ -38,12 +38,13 @@ public:
 
     JsonValue();
     template<typename T>
-    explicit JsonValue(const T &_value){
+    JsonValue(const T &_value){
 
         if constexpr(std::is_same_v< T , bool>)
         {
             nDebug("Boolean");
             m_isBoolean = true;
+            _typeH = type_handle::Boolean;
             bool_cont = _value;
         }
 
@@ -51,10 +52,11 @@ public:
         {
             nDebug("Number");
             m_isNumber = true;
+            _typeH = type_handle::Number;
             number_cont = _value;
         }
 
-        else if constexpr(std::is_same_v<T , std::string>)
+        else if constexpr(std::is_same_v< T  , std::string>)
         {
             nDebug("String");
             m_isString = true;
