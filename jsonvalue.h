@@ -25,6 +25,17 @@ private:
     bool bool_cont;
 
 public:
+
+    enum type_handle{
+        Null,
+        String,
+        Number,
+        Object,
+        Boolean
+    };
+
+    int _typeH;
+
     JsonValue();
     template<typename T>
     explicit JsonValue(const T &_value){
