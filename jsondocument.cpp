@@ -19,18 +19,27 @@ const std::string JsonDocument::toJson()
     auto const arr = m_object.toMap();
     for(auto & v : arr){
         dat.append("\""+v.first+"\": ");
-        if(v.second.isNull())
+
+        switch (v.second._typeH) {
+        case JsonValue::Null:{
             dat.append("\"\"");
-
-        else if(v.second.isNumber())
+            break;
+        }
+        case JsonValue::Number:{
             dat.append(std::to_string(v.second.toNumber()));
-
-        else if (v.second.isString())
+            break;
+        }
+        case JsonValue::String:{
             dat.append(std::string("\"")+v.second.toString()+"\"");
-
-        else if (v.second.isBoolean())
+            break;
+        }
+        case JsonValue::Boolean:{
             v.second.toBoolean() ? dat.append("true")
                                  : dat.append("false");
+            break;
+        }
+        default: break;
+        }
         dat.append(",\n");
     }
     for(auto &i : ",") dat.pop_back();
