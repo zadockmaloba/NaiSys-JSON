@@ -38,6 +38,11 @@ const std::string JsonDocument::toJson()
                                  : dat.append("false");
             break;
         }
+        case JsonValue::Object:{
+            auto const _b = JsonObject(v.second.toObject());
+            dat.append(JsonDocument(_b).toJson());
+            break;
+        }
         default: break;
         }
         dat.append(",\n");
