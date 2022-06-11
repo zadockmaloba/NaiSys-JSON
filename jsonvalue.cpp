@@ -32,9 +32,9 @@ int JsonValue::toNumber() const
     return number_cont;
 }
 
-void JsonValue::toObject() const
+_n_obj JsonValue::toObject() const
 {
-    //TODO: To be implemented
+    return object_cont;
 }
 
 bool JsonValue::toBoolean() const

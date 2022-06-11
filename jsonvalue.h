@@ -9,6 +9,9 @@
 
 namespace NaiSys {
 
+class JsonValue;
+
+typedef  std::map <std::string, JsonValue> _n_obj;
 
 class JsonValue
 {
@@ -23,6 +26,7 @@ private:
     std::string string_cont;
     int number_cont;
     bool bool_cont;
+    std::map <std::string, JsonValue> object_cont;
 
 public:
 
@@ -72,12 +76,19 @@ public:
             string_cont = _value;
         }
 
-        else if constexpr(std::is_same_v< decltype (_value)  , char const *>)
+        else if constexpr(std::is_same_v< T  , char **>)
         {
             nDebug("String");
             m_isString = true;
             _typeH = type_handle::String;
             string_cont = _value;
+        }
+
+        else if constexpr(std::is_same_v< T , std::map<std::string, JsonValue> >){
+            nDebug("Object");
+            m_isObject = true;
+            _typeH = type_handle::Object;
+            object_cont = _value;
         }
 
         else{
@@ -95,7 +106,7 @@ public:
 public:
     std::string toString() const;
     int toNumber() const;
-    void toObject() const;
+    _n_obj toObject() const;
     bool toBoolean()const;
 };
 
