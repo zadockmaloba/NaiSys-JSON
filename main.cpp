@@ -2,6 +2,7 @@
 
 #include "jsonobject.h"
 #include "jsondocument.h"
+#include "jsonvalue.h"
 
 using namespace std;
 
@@ -9,17 +10,30 @@ int main()
 {
     cout << "Hello World!" << endl;
 
-    NaiSys::JsonObject obj({
-        {"1234", "test"},
-        {"num1", 1234}
-    });
+    NaiSys::JsonObject obj;
+    obj = {
+        {
+            "emp1" , NaiSys::_n_obj({
+                {"EmpName" , (string)"Chris Jackman"},
+                {"EmpAge" , 34},
+                {"EmpGender" , (string)"Male"},
+                {"EmpDept" , (string)"IT"},
+                {"EmpDesg" , (string)"Project Manager"} })
+        },
+        {
+            "emp2" , NaiSys::_n_obj({
+                 {"EmpName" , "Mary Jane"},
+                 {"EmpAge" , 27},
+                 {"EmpGender" , (string)"Female"},
+                 {"EmpDept" , (string)"IT"},
+                 {"EmpDesg" , (string)"Team Leader"}
+              })
+        }
+    };
 
-    const char *test = "1234";
-    obj.append("str", (const char*)"1234");
-    obj.append("num", NaiSys::JsonValue(22234));
-    obj.append("bl", true);
 
-    cout << NaiSys::JsonDocument(obj).toJson();
+    //cout << NaiSys::JsonDocument(obj).toJson();
+    cout << NaiSys::JsonDocument(NaiSys::JsonObject(obj["emp2"].toObject())).toJson();
 
     return 0;
 }
