@@ -7,10 +7,20 @@ JsonObject::JsonObject()
 
 }
 
-JsonObject::JsonObject(const std::vector<_json_entry> &init)
+JsonObject::JsonObject(const std::map<std::string, JsonValue> &init)
+    : m_objectMap{init}
 {
-    for(auto const &v : init)
-        this->append(v.key.c_str(), v.val);
+
+}
+
+void JsonObject::operator=(const std::map<std::string, JsonValue> &init)
+{
+    m_objectMap = init;
+}
+
+JsonValue JsonObject::operator[](const std::string &key)
+{
+    return m_objectMap[key];
 }
 
 void JsonObject::append(const char *key, const JsonValue &val)

@@ -19,7 +19,10 @@ class JsonObject
 
 public:
     JsonObject();
-    explicit JsonObject(const std::vector<_json_entry> &init);
+    explicit JsonObject(const std::map<std::string, JsonValue> &init);
+
+    void operator=(const std::map<std::string, JsonValue> &init);
+    JsonValue operator[](const std::string &key);
 
     void append(const char *key, const JsonValue &val);
     const std::map <std::string, JsonValue> &toMap();
